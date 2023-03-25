@@ -1,0 +1,42 @@
+<div class="play-list-body">
+    <ul class="play-list-table-header">
+        <!-- El name y album son propiedades del json tracks -->
+        <li (click)="changeSort('name');">Nombre ❤</li> 
+        <li (click)="changeSort('album');">álbum 🆗</li>
+        <li>fecha incorporación 🍌😁</li>
+        <li><i class="uil uil-clock-eight"></i></li>
+    </ul>
+    <ul class="play-list-rows" *ngFor="let track of tracks | orderList : optionProperty.property : optionProperty.order">
+        <li class="track-name">
+            <ng-container *ngTemplateOutlet="coverSection; context:{track:track}"></ng-container> 
+            <!--  el contexto es la data independiente que le pasas al template, context es una palabra reservada y recibe un objeto, esa propiedad que esta en el context se puede usar en el ng-template  -->
+        </li>
+        <li class="track-name-opacity">
+            {{track.album}}
+        </li>
+        <li class="track-name-opacity">
+            {{track.album}}
+        </li>
+        <li class="track-name-opacity">
+            {{track.album}}
+        </li>
+
+    </ul>
+</div>
+
+<!--template del cover-->
+<ng-template #coverSection let-track="track"> 
+<!-- Le estas diciendo que declare una variable llamada track ese let-track es una variable que declaras y el valor que recibe es la la propiedad (el mismo nombre debe ser) que se le paso al context -->
+<!--  el track que se usa aqui abajo se refiere a la variable de let-track, justamente a esa si dice let-variable abajo deberia ser variable.cover, variable.name por ejemplo -->
+    <div class="cover-section">
+        <img appImgBroken class="cover-track" [src]="track.cover" [alt]="track.name">
+        <div class="cover-info">
+            <div class="name-track">{{track.name}}</div>
+            <div class="name-track-details">{{track.artist.name}}</div>
+        </div>
+    </div>
+
+</ng-template>
+
+
+<!-- Se esta pasando data por contexto a un template -->
